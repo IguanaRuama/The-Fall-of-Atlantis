@@ -1,75 +1,85 @@
 #include "GameTools.h"
+#pragma comment(lib, "winmm.lib")
 #include <iostream>
 #include <vector>
 #include <chrono>
-#include <iostream>
+#include <windows.h>
 #include <string>
 
-namespace GameTools
+void GameTools::clearScreen()
 {
-	void GameTools::clearScreen()
+	system("cls");
+}
+
+void GameTools::delay(int i_secs)
+{
+	_Thrd_sleep_for(i_secs * 1000);
+}
+
+void GameTools::exitGame()
+{		
+	cout << "Are you sure you sure you want to leave this adventure?	y/n \n";
+	string input;
+		
+	if (input == "y")
 	{
-		system("cls");
+		cout << "We hope to see you soon solider... \n";
+		delay(3);
+		exit;
 	}
-
-	void GameTools::delay(int i_secs)
+	if (input == "n")
 	{
-		_Thrd_sleep_for(i_secs * 1000);
+		cout << "Very well, we must not wait another moment. \n";
+		return;
 	}
-
-	void GameTools::exitGame()
+	else 
 	{
-		cout << "Are you sure you sure you want to leave this adventure?	y/n \n";
-		string input;
-		cin >> input;
+		cout << "Invalid input, try again. \n";
+		exit;
+	}
+}
 
-		if (input == "y")
-		{
-			cout << "We hope to see you soon solider... \n";
-			delay(3);
-			exit;
+void GameTools::startMusic(int i_music)
+{
+	switch (i_music)
+	{
+	case 1:
+		if (PlaySound(L"Intro.wav", NULL, SND_FILENAME | SND_ASYNC)) {
+			cout << "Playing sound...\n";
 		}
-		if (input == "n")
-		{
-			cout << "Very well, we must not wait another moment. \n";
-			return;
+		else {
+			cerr << "Failed to play sound.\n";
 		}
-		else 
-		{
-			cout << "Invalid input, try again. \n";
-			exit;
-		}
-
+		break;
+	default:
+		break;
 	}
+}
 
-	void GameTools::startMusic(int i_music)
+void GameTools::stopMusic()
+{
+	
+}
+
+void GameTools::outputImage(int i_stage)
+{
+	switch (i_stage)
 	{
+	case 1:
+		cout << "afloat atlantis \n";
+		break;
+
+	case 2:
+		cout << "attacked atlantis \n";
+		break;
+	case 3:
+		cout << "sunken atlantis \n";
+		break;
+	default:
+		cout << "image selection error \n";
+		break;
 	}
 
-	void GameTools::stopMusic()
-	{
-	}
-
-	void GameTools::outputImage(int i_stage)
-	{
-		switch (i_stage)
-		{
-		case 1:
-			cout << "afloat atlantis \n";
-			break;
-
-		case 2:
-			cout << "attacked atlantis \n";
-			break;
-		case 3:
-			cout << "sunken atlantis \n";
-			break;
-		default:
-			cout << "image selection error \n";
-			break;
-		}
-
-	}
 }
 
 

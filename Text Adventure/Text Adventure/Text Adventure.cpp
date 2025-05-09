@@ -8,8 +8,12 @@
 #include "Interaction.h"
 #include "Location.h"
 #include "Item.h"
+#include "Currency.h"
+#include "Shop.h"
+#include "GameTools.h"
 
 using namespace std;
+
 
 void startMenu()
 {
@@ -18,7 +22,9 @@ void startMenu()
 
 int main()
 {
-	startMenu();
+	GameTools::startMusic(1);
+	cout << "test\n";
+	GameTools::delay(10);
 
 }
 
