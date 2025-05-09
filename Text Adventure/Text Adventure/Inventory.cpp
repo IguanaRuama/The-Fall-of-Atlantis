@@ -130,6 +130,7 @@ string Inventory::outputInventory()
 string Inventory::outputDescription(int i_itemIndex)
 {
 	string output = items[i_itemIndex]->getName() + ": " + items[i_itemIndex]->getDescription();
+	return output;
 }
 
 

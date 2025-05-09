@@ -1,14 +1,14 @@
 #include "Item.h"
-#include "Inventory.h"
 #include <string>
 #include <vector>
 #include <iostream>
 #include <algorithm>
 
-Item::Item(string i_name, string i_description)
+Item::Item(string i_name, string i_description, int i_cost)
 {
 	name = i_name;
 	description = i_description;
+	cost = i_cost;
 }
 
 string Item::getName()
@@ -23,12 +23,15 @@ string Item::getDescription()
 
 string Item::getActions()
 {
-	string result;
-
+	string output = "============================================================================================================================= \n";
 	for (int i = 0; actions.size(); i++)
 	{
-		result += "[" + to_string(i) + "] " + action + "\n";
+		output += "[" + to_string(i) + "] " + action + "\n";
 	}
+	output += "============================================================================================================================= \n";
+
+	return output;
+	
 }
 
 int Item::getCost()

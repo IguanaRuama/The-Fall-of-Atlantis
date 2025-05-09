@@ -9,10 +9,10 @@
 
 Shop::Shop()
 {
-	stock.push_back(new Item("Blunt Dagger", "Clearly used."));
+	stock.push_back(new Item("Blunt Dagger", "Clearly used.", 3));
 	stock.back()->setCost(5);
 
-	stock.push_back(new Item("Cloth Cape", "A dark, large, hooded garment."));
+	stock.push_back(new Item("Cloth Cape", "A dark, large, hooded garment.", 8));
 	stock.back()->setCost(5);
 }
 

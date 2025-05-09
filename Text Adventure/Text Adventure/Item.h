@@ -1,10 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Inventory.h"
 
 using namespace std;
-
 
 class Item
 {
@@ -16,7 +14,7 @@ private:
 	int cost;
 
 public:
-	Item(string i_name, string i_description);
+	Item(string i_name, string i_description, int i_cost);
 
 	string getName();
 	string getDescription();
