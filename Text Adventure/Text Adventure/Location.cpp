@@ -2,21 +2,15 @@
 #include "Item.h"
 #include <iostream>
 
-Location::Location(string i_name, string i_decision, string i_description)
+Location::Location(string i_name, string i_description)
 {
 	locationName = i_name;
-	locationDecision = i_decision;
 	locationDescription = i_description;
 }
 
 string Location::getLocationName()
 {
 	return locationName;
-}
-
-string Location::getLocationDecision()
-{
-	return locationDecision;
 }
 
 string Location::getLocationDescription()
@@ -39,14 +33,19 @@ void Location::setLocationName(string i_name)
 	locationName = i_name;
 }
 
-void Location::setLocationDecision(string i_decision)
-{
-	locationDecision = i_decision;
-}
 
 void Location::setLocationDescription(string i_description)
 {
 	locationDescription = i_description;
+}
+
+void Location::removeLink(int i_lIndex)
+{
+	auto it = find(links.begin(), links.end(), links[i_lIndex]);
+	if (it != links.end())
+	{
+		links.erase(it);
+	}
 }
 
 void Location::addLink(Location* i_link)

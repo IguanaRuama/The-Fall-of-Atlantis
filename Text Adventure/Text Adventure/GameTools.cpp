@@ -6,17 +6,17 @@
 #include <windows.h>
 #include <string>
 
-void GameTools::clearScreen()
+void Tools::GameTools::clearScreen()
 {
 	system("cls");
 }
 
-void GameTools::delay(int i_secs)
+void Tools::GameTools::delay(int i_secs)
 {
 	_Thrd_sleep_for(i_secs * 1000);
 }
 
-void GameTools::exitGame()
+void Tools::GameTools::exitGame()
 {		
 	cout << "Are you sure you sure you want to leave this adventure?	y/n \n";
 	string input;
@@ -39,29 +39,24 @@ void GameTools::exitGame()
 	}
 }
 
-void GameTools::startMusic(int i_music)
+void Tools::GameTools::startMusic(int i_music)
 {
 	switch (i_music)
 	{
 	case 1:
-		if (PlaySound(L"Intro.wav", NULL, SND_FILENAME | SND_ASYNC)) {
-			cout << "Playing sound...\n";
-		}
-		else {
-			cerr << "Failed to play sound.\n";
-		}
+		PlaySound(L"Intro.wav", NULL, SND_FILENAME | SND_ASYNC); //SFML if had time to implement
 		break;
 	default:
 		break;
 	}
 }
 
-void GameTools::stopMusic()
+void Tools::GameTools::stopMusic()
 {
-	
+	PlaySound(NULL, 0, 0);
 }
 
-void GameTools::outputImage(int i_stage)
+void Tools::GameTools::outputImage(int i_stage)
 {
 	switch (i_stage)
 	{
@@ -79,7 +74,6 @@ void GameTools::outputImage(int i_stage)
 		cout << "image selection error \n";
 		break;
 	}
-
 }
 
 
