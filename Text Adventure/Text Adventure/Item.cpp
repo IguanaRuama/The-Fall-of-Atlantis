@@ -26,7 +26,7 @@ string Item::getActions()
 	string output = "============================================================================================================================= \n";
 	for (int i = 0; actions.size(); i++)
 	{
-		output += "[" + to_string(i) + "] " + actions[i].name + "\n";
+		output += "[" + to_string(i) + "] " + actions[i].text + "\n";
 	}
 	output += "============================================================================================================================= \n";
 
@@ -37,6 +37,14 @@ string Item::getActions()
 int Item::getCost()
 {
 	return cost;
+}
+
+string Item::getEffect(int i_eIndex)
+{
+	if (i_eIndex >= 0 && i_eIndex < actions.size()) {
+		return actions[i_eIndex].effectText;
+	}
+	return "Invalid choice.";
 }
 
 void Item::setName(string i_name)
@@ -51,7 +59,10 @@ void Item::setDescription(string i_description)
 
 void Item::setDefaultActions()
 {
-	actions = { "Examine", "Discard" };
+	actions = {
+		ItemAction("Examine", "You take a closer look."),
+		ItemAction("Discard", "You discard the item.")
+	};
 }
 
 void Item::setCost(int i_cost)
@@ -59,17 +70,20 @@ void Item::setCost(int i_cost)
 	cost = i_cost;
 }
 
-void Item::addAction(string i_action)
-{
-	actions.push_back(i_action);
+void Item::setEffect(ItemAction i_action, string i_effect)
+{ 
+	actions.emplace_back(i_action.text, i_effect);
 }
 
-void Item::removeAction(string i_action)
+void Item::addAction(string i_name, string i_effect)
 {
-	auto it = find(actions.begin(), actions.end(), i_action);
-	if (it != actions.end())
-	{
-		actions.erase(it);
-	}
+	actions.emplace_back(i_name, i_effect);
+}
 
+void Item::removeAction(int i_aIndex)
+{
+	if (i_aIndex >= 0 && i_aIndex < actions.size())
+	{
+		actions.erase(actions.begin() + i_aIndex);
+	}
 }

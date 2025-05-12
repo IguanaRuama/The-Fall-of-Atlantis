@@ -2,10 +2,11 @@
 #include "Item.h"
 #include <iostream>
 
-Location::Location(string i_name, string i_description)
+Location::Location(string i_name, string i_description, string i_travelDescription)
 {
 	locationName = i_name;
 	locationDescription = i_description;
+	locationTravelDescription = i_travelDescription;
 }
 
 string Location::getLocationName()
@@ -16,6 +17,11 @@ string Location::getLocationName()
 string Location::getLocationDescription()
 {
 	return locationDescription;
+}
+
+string Location::getLocationTravelDescription()
+{
+	return getLocationTravelDescription();
 }
 
 vector<Location*> Location::getLinks()
@@ -37,6 +43,11 @@ void Location::setLocationName(string i_name)
 void Location::setLocationDescription(string i_description)
 {
 	locationDescription = i_description;
+}
+
+void Location::setLocationTravelDescription(string i_travelDescription)
+{
+	locationTravelDescription = i_travelDescription;
 }
 
 void Location::removeLink(int i_lIndex)

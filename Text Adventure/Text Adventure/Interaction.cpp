@@ -79,10 +79,14 @@ void Interaction::setRequiredItem(Item* i_requiredItem)
 	requiredItem.push_back(i_requiredItem);
 }
 
-
 void Interaction::setEffect(Choice i_choice, string i_effect)
 {
 	choices.emplace_back(i_choice.text, i_effect);
+}
+
+void Interaction::addChoice(string i_text, string i_effect)
+{
+	choices.emplace_back(i_text, i_effect);
 }
 
 void Interaction::removeChoice(int i_cIndex)

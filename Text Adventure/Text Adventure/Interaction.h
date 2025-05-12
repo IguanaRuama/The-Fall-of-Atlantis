@@ -12,7 +12,8 @@ struct Choice
 	string text;
 	string effectText;
 
-	Choice(string& t, string& e) : text(t), effectText(e) {}
+	Choice(string& t, string& e) 
+		: text(t), effectText(e) {}
 };
 
 class Interaction
@@ -33,9 +34,9 @@ public:
 	
 	void setDescription(string i_description);
 	void setRequiredItem(Item* i_requiredItem);
-	void setEffectText(string i_effectText);
 	void setEffect(Choice i_choice, string i_effect);
 
+	void addChoice(string i_text, string i_effect);
 	void removeChoice(int i_cIndex);
 
 	bool isAvailable(Inventory i_inventory);

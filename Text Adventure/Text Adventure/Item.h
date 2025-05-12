@@ -6,10 +6,11 @@ using namespace std;
 
 struct ItemAction
 {
-	string name;
+	string text;
 	string effectText;
 
-	ItemAction(string& n, string& e) : name(n), effectText(e) {}
+	ItemAction(const string& t, const string& e)
+		: text(t), effectText(e) {}
 };
 
 class Item
@@ -28,16 +29,16 @@ public:
 	string getDescription();
 	string getActions();
 	int getCost();
-	string geEffect(int i_eIndex);
+	string getEffect(int i_eIndex);
 
 	void setName(string i_name);
 	void setDescription(string i_description);
 	void setDefaultActions();
 	void setCost(int i_cost);
-	void setEffect(string i_eIndex); //here
+	void setEffect(ItemAction i_action, string i_effect); //here
 	
-
-	void removeAction(string i_action);
+	void addAction(string i_name, string i_effect);
+	void removeAction(int i_aIndex);
 
 
 };
