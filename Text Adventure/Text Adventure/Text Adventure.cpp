@@ -21,7 +21,7 @@ int stage; //could potentially have menus as stages etc
 int familyBond = 0;
 
 Inventory playerInventory = Inventory();
-Currency playerCurrency = Currency(0, "A shimmering coin forged of gold--  small trinkets that hold plentiful meaning.");
+Currency playerCurrency = Currency(0, "Drachmae-- a shimmering coin forged of gold; small trinkets that hold plentiful meaning.");
 
 void onTimerEnd(int stage)
 {
@@ -173,23 +173,56 @@ void stageOne()
 		Item vegetables = Item("Bundle of Vegetables", "A small bag containing fresh vegetables from your garden", 10);
 		vegetables.setDefaultActions();
 
-		//Add interactions
+		//PATIO INTERACTIONS
 
 		Interaction enterHome("Enter your home.", "Simple yet sturdy, the door to your home shields the warmth of your family from the hardships of the world. A worn lock finds its own home at\n"
 			" the edge of the wooden barrier.");
+
+		enterHome.addChoice("Attempt to open the door", "You attempt to push the door open, yet to no avail as the lock stands sturdy. Your hands rummage in your satchel for\n"
+			" your key... Yet to no avail... Guess you'll have to find another way in.");
+		enterHome.addChoice("Kick the door", "Your boot strikes the door with a heavy thud, loud enough to rattle the hinges and startle a bird from the fig tree. Just as you step\n"
+			"back to try again, a sharp voice cuts through the courtyard.\n"
+			"\n Rhesus!\n"
+			"\n You turn to see Anthusa standing a few paces away, hands on her hips, a basket of herbs dangling forgotten at her side. Beside her, Phylas is frozen mid-swing with a\n"
+			" stick, eyes wide with delight at the spectacle.\n"
+			"\n 'Have you truly forgotten where we keep the key?' she asks, brows arched, exasperation tempered with a hint of irritation. 'Or were you hoping to impress the door with\n"
+			" your martial training?' She quips... Where was that spare key again?");
+
+		enterHome.setRequiredItem(&patioKey);
+		patioKey.addAction("Use key.", "With a soft click and the groan of old wood easing on its hinges, the door yields inward, releasing a draft of cool, earthy air from within the\n"
+			"shaded interior. The scent of home—clay, herbs, and sun-warmed stone—spills into the courtyard as the threshold opens, quiet and unassuming, as if nothing had disturbed its routine.");
+
 
 		Interaction explorePatio("Explore the patio", "You stand before your humble home; Phylas remains locked in imaginary battle whilst Anthusa oversees-- her lips curling as he\n"
 			" slays whatever beast dared cross hin.");
 		explorePatio.addChoice("Join Phylas.", "With a swift scoop you lift Phylas into the air, swinging and spinning the fearsome hero as his stern facade erupts into childish\n"
 			" giggles. The sight is enough to bring a subtle smile to Anthusa's face accompanied by a quiet tutting. With arms weary from sparring, you place your son back upon\n"
-			" his feet, leaving the 'soldier' back to his battle."); //finished here
+			" his feet, leaving the 'soldier' back to his battle.");
+		//+1 fam
 
+		explorePatio.addChoice("Greet Anthusa.", "You step toward Anthusa, her hands paused in their work as she looks up at you with that familiar, quiet smile. The sunlight\n"
+			" catches in her hair, and for a moment, the world narrows to just the two of you. She brushes a bit of soil from her palms onto her tunic and says, 'Back already\n"
+			"? Or did the soldiers grow tired of you showing them how it's done?' There’s warmth in her voice—teasing, but gentle—the kind that wraps around your tired bones like\n"
+			"a well-worn blanket. She slips a small cloth pouch into your hand. 'Here—- three drachmae. I took the olives and greens to the market this morning.The baker paid fair.\n"
+			" She shrugs, modest as ever. 'Might be enough for oil... or whatever it is you warriors waste coin on when you're pretending not to be sore.'");
+		// +5 money
 
+		explorePatio.addChoice("Investigate basin", "Once used to collect rainwater in better seasons, the old stone basin now sits dry and repurposed, its cracked rim softened by time\n"
+			" and a layer of dust. Inside, it holds the treasures of a child’s world: a crooked fleet of stick ships with fig-leaf sails, a trio of round stones painted as warriors,\n"
+			" and a clay shard with a scratched-on face, proudly dubbed “Cyclops.” Bits of string, feathers, and bent twigs are tucked into the corners like tools awaiting orders. What\n"
+			" was once a vessel for life-giving water now cradles the wild imaginings of Phylas—battles waged in silence, kingdoms built and toppled before supper, and dreams sturdy\n"
+			"enough to weather any war.");
 
-		enterHome.addChoice("Attempt to open the door", "You attempt to push the door open, yet to no avail as the lock stands sturdy.");
-		enterHome.addChoice("Kick the door", "Stern look from wife.");
-		enterHome.setRequiredItem(&patioKey);
+		explorePatio.addChoice("Investigate crate", "Pushed up against the sun-bleached wall just beside the doorway, the old wooden has corners softened by years of weather and wear.\n"
+			" The wood is greyed and splintered in places, patched once with a strip of cloth now stiff with age. Anthusa sometimes rests her basket on it while working in the garden, and\n"
+			" Phylas uses it as a pirate ship or watchtower depending on the day.\n"
+			"\n Behind it, wedged into the gap between crate and wall, is a flicker of silver. There lies the family's quiet secret: a flat stone with just enough give to lift free, beneath\n"
+			" which rests the spare key tothe house. It's a hiding spot born of necessity, known only to the three of you—- and now, dusted with the faint mark of your bootprints from earlier\n"
+			" , it feels like the quiet keeper of a dozen small emergencies and daily forgettings.");
+		// add key
 		
+		//KITCHEN INTERACTIONS
+
 }
 
 int main()
