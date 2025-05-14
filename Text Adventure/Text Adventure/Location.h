@@ -21,8 +21,7 @@ public:
 	string getLocationName();
 	string getLocationDescription();
 	string getLocationTravelDescription();
-	string outputLinks();
-	string outputInteractions();
+
 	vector<Location*> getLinks();
 	vector<Interaction*> getInteractions();
 
@@ -32,6 +31,9 @@ public:
 
 	void removeLink(int i_lIndex);
 	void addLink(Location* i_link);
+
+	void outputLinks();
+	void outputInteractions();
 	void addInteraction(Interaction* i_interaction);
 	void removeInteraction(Interaction* i_interaction, vector<Interaction*>i_interactions);
 };

@@ -23,7 +23,7 @@ public:
 	bool hasItem(Item* i_item);
 
 	vector<Item*>& getItems();
-	string outputInventory();
+	void outputInventory();
 	string outputDescription(int i_itemIndex);
 
 };

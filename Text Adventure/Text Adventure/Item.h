@@ -29,9 +29,12 @@ public:
 
 	string getName();
 	string getDescription();
-	string getActions();
+	vector<ItemAction> getActions();
 	int getCost();
 	string getEffect(int i_eIndex);
+	function<void()> getFunction(int i_cIndex);
+	
+	void runFunction(function<void()> i_function);
 
 	void setName(string i_name);
 	void setDescription(string i_description);
@@ -39,6 +42,7 @@ public:
 	void setCost(int i_cost);
 	void setEffectAndFunction(ItemAction i_action, string i_effect, function<void()> i_function);
 	
+	void outputActions();
 	void addAction(string i_name, string i_effect, function<void()> i_function);
 	void removeAction(int i_aIndex);
 

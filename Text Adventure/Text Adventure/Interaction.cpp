@@ -22,38 +22,31 @@ string Interaction::getDescription()
 	return description;
 }
 
-string Interaction::outputChoices()
+void Interaction::outputChoices(Inventory* i_inventory)
 {
-	string choicesList;
 	cout << "What do you do? \n";
 	cout << "\n";
 
 	for (int i = 0; i < choices.size(); i++)
 	{
-		choicesList += "[" + to_string(i) + "] " + choices[i].text + "\n";
-	}
-	if (getRequiredItems().size() > 0)
-	{
-		for (int i = 0; i < getRequiredItems().size(); i++)
-		{
-			choicesList += "[" + to_string(i + choices.size()) + "] " + " Use the " + getRequiredItems()[i]->getName() + "\n";
-		}
-	}
-	if (!choicesList.empty())
-	{
-		choicesList = choicesList.substr(0, choicesList.size() - 2); //removes comma and space
+		cout << "[" << to_string(i) << "] " << choices[i].text << "\n";
 	}
 
-	return choicesList;
+	vector<Item*> usableItems = getRequiredItems(i_inventory);
+	for (int i = 0; i < usableItems.size(); i++)
+	{
+		cout << "[" << to_string(i + choices.size()) << "] Use the " << usableItems[i]->getName() << "\n";
+	}
+
 }
 
-vector<Item*>& Interaction::getRequiredItems()
+vector<Item*> Interaction::getRequiredItems(Inventory* i_inventory)
 {
 	vector<Item*> itemsList;
 
 	for (int i = 0; i < requiredItem.size(); i++)
 	{
-		if (Inventory().hasItem(requiredItem[i]))
+		if (i_inventory->hasItem(requiredItem[i]))
 		{
 			itemsList.push_back(requiredItem[i]);
 		}
@@ -73,6 +66,11 @@ string Interaction::getEffect(int i_cIndex)
 function<void()> Interaction::getFunction(int i_cIndex)
 {
 	return choices[i_cIndex].effectFunction;
+}
+
+vector<Choice> Interaction::getChoices()
+{
+	return choices;
 }
 
 void Interaction::setDescription(string i_description)

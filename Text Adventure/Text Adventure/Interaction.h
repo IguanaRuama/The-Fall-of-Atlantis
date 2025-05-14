@@ -30,10 +30,10 @@ public:
 
 	string getName();
 	string getDescription();
-	string outputChoices();
-	vector<Item*>& getRequiredItems();
+	vector<Item*> getRequiredItems(Inventory* i_inventory);
 	string getEffect(int i_cIndex);
 	function<void()> getFunction(int i_cIndex);
+	vector<Choice> getChoices();
 
 	
 	void setDescription(string i_description);
@@ -41,6 +41,7 @@ public:
 	void setEffect(Choice i_choice, string i_effect);
 	void runFunction(function<void()> i_function);
 
+	void outputChoices(Inventory* i_inventory);
 	void addChoice(string i_text, string i_effect, function<void()>i_function);
 	void removeChoice(int i_cIndex);
 

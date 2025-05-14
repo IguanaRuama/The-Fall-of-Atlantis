@@ -7,6 +7,8 @@
 #include <mutex>
 #include <chrono>
 #include <condition_variable>
+#include <limits>
+
 
 #include "Inventory.h"
 #include "Interaction.h"
@@ -109,38 +111,78 @@ void startMenu()
 
 }
 
-void choicesMenu(Interaction* interaction) 
+void itemActionsMenu(Inventory* inventory, Item* item, int stage)
 {
-	cout << "\n" << interaction->getDescription() << "\n";
+	cout << "\n" << item->getName() << "Actions:\n";
 
-	while (true) 
+	while (true)
 	{
-		cout << "\n Available Choices:\n";
-		interaction->outputChoices();
+		item->outputActions();
 
-		cout << "[" << interaction->outputChoices().size() << "] Back\n> ";
+		cout << "[" << item->getActions().size() << "] Back\n> ";
 
 		cin >> input;
 		choice = stoi(input);
 
-		if (choice >= 0 && choice <= interaction->outputChoices().size()) 
+		if (choice == item->getActions().size())
 		{
-			cout << "\n" << interaction->getEffect(choice) << "\n";
-
-			interaction->runFunction(interaction->getFunction(choice));
+			return;
 		}
-		else if (choice == interaction->outputChoices().size()) 
+		else if (choice >= 0 && choice < item->getActions().size())
 		{
+			cout << "\n" << item->getEffect(choice) << "\n";
+			item->runFunction(item->getFunction(choice));
+
 			break;
 		}
-		else 
+		else
 		{
 			cout << "Invalid input.\n";
 		}
 	}
 }
 
-void interactionMenu(Location* location)
+void choicesMenu(Inventory* inventory, Interaction* interaction, int stage)
+{
+	cout << "\n" << interaction->getDescription() << "\n";
+
+	while (true) 
+	{
+		cout << "\n Available Choices:\n";
+		interaction->outputChoices(&playerInventory);
+
+
+		cout << "[" << interaction->getChoices().size() + interaction->getRequiredItems(&playerInventory).size() << "] Back\n> ";
+
+		cin >> input;
+		choice = stoi(input);
+
+		if (choice == (interaction->getChoices().size() + interaction->getRequiredItems(&playerInventory).size()))
+		{
+			return;
+		}
+		else if (choice >= 0 && choice < interaction->getChoices().size())
+		{
+			cout << "\n" << interaction->getEffect(choice) << "\n";
+			interaction->runFunction(interaction->getFunction(choice));
+
+			return;
+		} 
+		else if (choice >= interaction->getChoices().size() && choice < (interaction->getChoices().size() + interaction->getRequiredItems(inventory).size()))
+		{
+			choice = choice - interaction->getChoices().size();
+			itemActionsMenu(inventory, interaction->getRequiredItems(inventory)[choice], stage);
+
+			return;
+		}
+		else
+		{
+			cout << "Invalid input.\n";
+		}
+	}
+}
+
+void interactionMenu(Location* location, int stage)
 {
 	if (location->getInteractions().empty()) 
 	{
@@ -153,18 +195,25 @@ void interactionMenu(Location* location)
 		cout << "\n Available Interactions:\n";
 		location->outputInteractions();
 
-		cout << "[" << location->outputInteractions().size() << "] Back.\n";
+		cout << "[" << location->getInteractions().size() << "] Back.\n";
 
 		cin >> input;
 		choice = stoi(input);
 
-		if (choice >= 0 && choice <= location->outputInteractions().size() - 1)
+		if (choice == location->getInteractions().size())
 		{
-			choicesMenu(location->getInteractions()[choice]);
+			return;
 		}
-		else if (choice == location->outputInteractions().size())
+		else if (choice >= 0 && choice <= location->getInteractions().size() - 1)
 		{
-			break;
+			if (location->getInteractions()[choice] != nullptr)
+			{
+				choicesMenu(&playerInventory, location->getInteractions()[choice], stage);
+			}
+			else
+			{
+				cout << "Invalid interaction. Returning to menu.\n";
+			}
 		}
 		else 
 		{
@@ -173,23 +222,25 @@ void interactionMenu(Location* location)
 	}
 }
 
-void travelMenu(Location*& location) 
+void travelMenu(Location*& location, int stage) 
 {
 	while (true) 
 	{
 		location->outputLinks();
-		cout << "[" << location->outputLinks().size() << "] Back.\n ";
+		cout << "[" << location->getLinks().size() << "] Back.\n ";
 
 		cin >> input;
 		choice = stoi(input);
 
-		if (choice >= 0 && choice <= location->outputLinks().size())
+		if (choice == location->getLinks().size())
+		{
+			return;
+		}
+		else if (choice >= 0 && choice < location->getLinks().size())
 		{
 			location = location->getLinks()[choice];
-			break;
-		}
-		else if (choice == location->outputLinks().size())
-		{
+			currentLocation = location;
+
 			break;
 		}
 		else 
@@ -217,18 +268,19 @@ void gameplayMenu(int stage, Location* location)
 		switch (choice)
 		{
 		case 1:
-			interactionMenu(location);
+			interactionMenu(location, stage);
 			break;
 
 		case 2:
-			travelMenu(location);
+			travelMenu(location, stage);
 			break;
 
 		case 3:
 			playerInventory.outputInventory();
 
 			cout << "Press 'Enter' to return to menu.\n";
-			getline(cin, input);
+
+			//ADD INVENTORY MENU TO FUNCTIONS, ALLOW PLAYERS TO EXAMINE + DISCARD IN MENU,
 			break;
 
 		case 4:
@@ -257,6 +309,7 @@ void gameplayMenu(int stage, Location* location)
 				cout << "Invalid Input. Please enter 1 or 2.\n";
 				cin >> input;
 			}
+			break;
 			
 		case 5:
 			nextStage(stage);
@@ -368,7 +421,8 @@ void stageOne()
 			" to his room",
 			[&]()
 			{
-				frontPatio.addLink(&kitchen);
+				cout << "Adding kitchen to current location: " << currentLocation->getLocationName() << endl;
+				currentLocation->addLink(&kitchen);
 			});
 		//add key and link
 
@@ -410,7 +464,9 @@ void stageOne()
 
 			[&]() 
 			{
+				cout << "Inventory size before: " << playerInventory.getItems().size() << "\n";
 				playerInventory.takeItemChoice(&patioKey);
+				cout << "Inventory size after: " << playerInventory.getItems().size() << "\n";
 			});
 		// add key
 
@@ -624,7 +680,7 @@ void stageOne()
 
 		//GAMEPLAY
 
-		int currentStage = 1;
+		stage = 1;
 		currentLocation = &frontPatio;
 
 		cout << "With each breath the tase of salt remains prevalent in the City of Atlantis; a flavour you've grown awfully atuned to as breaths come deeper\n"
@@ -639,9 +695,22 @@ void stageOne()
 		cout << "Press 'Enter' to continue.\n";
 		getline(cin, input);
 
-		thread timerThread(startTimer, 5 * 60, currentStage);
+		thread timerThread(startTimer, 5 * 60, stage);
 		
-		gameplayMenu(stage, currentLocation);
+		while (true)
+		{
+			gameplayMenu(stage, currentLocation);
+		}
+
+		//inventory doesn't display
+		//travel link doesnt display
+		//add new desciption to open door when key used
+		//
+
+}
+
+void stageTwo()
+{
 
 }
 

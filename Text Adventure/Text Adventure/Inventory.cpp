@@ -16,24 +16,28 @@ Inventory::Inventory()
 
 void Inventory::takeItemChoice(Item* i_item)
 {
-	cout << "Do you wish to pick up the " << i_item->getName() << "?	(y/n)\n";
-	string input;
+	if (hasItem(i_item) == false)
+	{
+		cout << "Do you wish to pick up the " << i_item->getName() << "?	(y/n)\n";
+		string input;
 
-	cin >> input;
+		cin >> input;
 
-	if (input == "y" || input == "Y")
-	{
-		addItem(i_item);
+		if (input == "y" || input == "Y")
+		{
+			addItem(i_item);
+		}
+		else if (input == "n" || input == "N")
+		{
+			cout << "You leave the " << i_item->getName() << " where you found it.\n";
+		}
+		else
+		{
+			cout << "Invalid input, try again.\n";
+			takeItemChoice(i_item);
+		}
 	}
-	else if (input == "n" || input == "N")
-	{
-		cout << "You leave the " << i_item->getName() << " where you found it.\n";
-	}
-	else
-	{
-		cout << "Invalid input, try again.\n";
-		takeItemChoice(i_item);
-	}
+	
 }
 
 void Inventory::addItem(Item* i_item)
@@ -119,10 +123,11 @@ void Inventory::removeItem(Item* i_item)
 
 bool Inventory::hasItem(Item* i_item)
 {
-	for (int i = 0; i < items.size(); i++)
+	for (Item* invItem : items)
 	{
-		if(i_item->getName() == items[i]->getName())
+		if (invItem == i_item)
 		{
+			// compare by pointer
 			return true;
 		}
 	}
@@ -134,19 +139,18 @@ vector<Item*>& Inventory::getItems()
 	return items;
 }
 
-string Inventory::outputInventory()
+void Inventory::outputInventory()
 {
-	string output = "============================================================================================================================= \n";
-	output += "Inventory: \n";
+	cout << "============================================================================================================================= \n";
+	cout << "Inventory: \n";
 
 	for (int i = 0; i < items.size(); i++)
 	{
-		output += outputDescription(i) + "\n";
+		cout << outputDescription(i) + "\n";
 	}
 
-	output += "============================================================================================================================= \n";
+	cout << "============================================================================================================================= \n";
 
-	return output;
 }
 
 string Inventory::outputDescription(int i_itemIndex)

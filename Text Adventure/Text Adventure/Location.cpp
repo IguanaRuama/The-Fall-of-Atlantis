@@ -21,47 +21,43 @@ string Location::getLocationDescription()
 
 string Location::getLocationTravelDescription()
 {
-	return getLocationTravelDescription();
+	return locationTravelDescription;
 }
 
-string Location::outputLinks()
+void Location::outputLinks()
 {
-	string output = "============================================================================================================================= \n";
-	output += "Travel: \n";
+	cout << "============================================================================================================================= \n";
+	cout << "Travel: \n";
 
-	for (int i = 0; i < links.size(); i++)
+	for (size_t i = 0; i < links.size(); ++i)
 	{
-		output += links[i]->getLocationName() + "            ";
+		cout << "[" << i << "] " << links[i]->getLocationTravelDescription() << "\n";
+
+		cout << "============================================================================================================================= \n";
 	}
-
-	output += "============================================================================================================================= \n";
-
-	return output;
-}
-
-string Location::outputInteractions()
-{
-	string output = "============================================================================================================================= \n";
-	output += "Interactions: \n";
-
-	for (int i = 0; i < interactions.size(); i++)
-	{
-		output += "[" + to_string(i) + "] " + interactions[i]->getName() + "\n";
-	}
-
-	output += "============================================================================================================================= \n";
-
-	return output;
 }
 
 vector<Location*> Location::getLinks()
 {
-	return vector<Location*>();
+	return links;
 }
 
 vector<Interaction*> Location::getInteractions()
 {
-	return vector<Interaction*>();
+	return interactions;
+}
+
+void Location::outputInteractions()
+{
+	cout << "============================================================================================================================= \n";
+	cout << "Interactions: \n";
+
+	for (size_t i = 0; i < interactions.size(); ++i)
+	{
+		cout << "[" << i << "] " << interactions[i]->getName() << "\n";
+
+		cout << "============================================================================================================================= \n";
+	}
 }
 
 void Location::setLocationName(string i_name)
@@ -69,8 +65,7 @@ void Location::setLocationName(string i_name)
 	locationName = i_name;
 }
 
-
-void Location::setLocationDescription(string i_description)
+	void Location::setLocationDescription(string i_description)
 {
 	locationDescription = i_description;
 }
@@ -91,7 +86,10 @@ void Location::removeLink(int i_lIndex)
 
 void Location::addLink(Location* i_link)
 {
-	links.push_back(i_link);
+	if (std::find(links.begin(), links.end(), i_link) == links.end())
+	{
+		links.push_back(i_link);
+	};
 }
 
 void Location::addInteraction(Interaction* i_interaction)

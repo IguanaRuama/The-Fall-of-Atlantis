@@ -21,17 +21,9 @@ string Item::getDescription()
 	return description;
 }
 
-string Item::getActions()
+vector<ItemAction> Item::getActions()
 {
-	string output = "============================================================================================================================= \n";
-	for (int i = 0; actions.size(); i++)
-	{
-		output += "[" + to_string(i) + "] " + actions[i].text + "\n";
-	}
-	output += "============================================================================================================================= \n";
-
-	return output;
-	
+	return actions;
 }
 
 int Item::getCost()
@@ -45,6 +37,16 @@ string Item::getEffect(int i_eIndex)
 		return actions[i_eIndex].effectText;
 	}
 	return "Invalid choice.";
+}
+
+function<void()> Item::getFunction(int i_cIndex)
+{
+	return actions[i_cIndex].effectFunction;
+}
+
+void Item::runFunction(function<void()> i_function)
+{
+	i_function();
 }
 
 void Item::setName(string i_name)
@@ -73,6 +75,14 @@ void Item::setCost(int i_cost)
 void Item::setEffectAndFunction(ItemAction i_action, string i_effect, function<void()> i_function)
 { 
 	actions.emplace_back(i_action.text, i_effect, i_function);
+}
+
+void Item::outputActions()
+{
+	for (int i = 0; i < actions.size(); i++)
+	{
+		cout << "[" << to_string(i) << "] " << actions[i].text << "\n";
+	}
 }
 
 void Item::addAction(string i_name, string i_effect, function<void()> i_function)
