@@ -16,6 +16,7 @@ private:
 public:
 	Inventory();
 
+	void takeItemChoice(Item* i_item);
 	void addItem(Item* i_item);
 	void discardItem(Item* i_item); //used in inventory when player chooses to discard, prompts with quesions
 	void removeItem(Item* i_item); // used in funtions, solely to remove it from a vector

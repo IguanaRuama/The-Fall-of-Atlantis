@@ -24,14 +24,44 @@ string Location::getLocationTravelDescription()
 	return getLocationTravelDescription();
 }
 
+string Location::outputLinks()
+{
+	string output = "============================================================================================================================= \n";
+	output += "Travel: \n";
+
+	for (int i = 0; i < links.size(); i++)
+	{
+		output += links[i]->getLocationName() + "            ";
+	}
+
+	output += "============================================================================================================================= \n";
+
+	return output;
+}
+
+string Location::outputInteractions()
+{
+	string output = "============================================================================================================================= \n";
+	output += "Interactions: \n";
+
+	for (int i = 0; i < interactions.size(); i++)
+	{
+		output += "[" + to_string(i) + "] " + interactions[i]->getName() + "\n";
+	}
+
+	output += "============================================================================================================================= \n";
+
+	return output;
+}
+
 vector<Location*> Location::getLinks()
 {
-	return links;
+	return vector<Location*>();
 }
 
 vector<Interaction*> Location::getInteractions()
 {
-	return interactions;
+	return vector<Interaction*>();
 }
 
 void Location::setLocationName(string i_name)
@@ -67,5 +97,16 @@ void Location::addLink(Location* i_link)
 void Location::addInteraction(Interaction* i_interaction)
 {
 	interactions.push_back(i_interaction);
+}
+
+void Location::removeInteraction(Interaction* i_interaction, vector<Interaction*>i_interactions)
+{
+	auto it = find(interactions.begin(), interactions.end(), i_interaction);
+
+	// If found, remove it from the vector
+	if (it != interactions.end())
+	{
+		interactions.erase(it);
+	}
 }
 

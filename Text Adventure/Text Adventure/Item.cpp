@@ -70,14 +70,14 @@ void Item::setCost(int i_cost)
 	cost = i_cost;
 }
 
-void Item::setEffect(ItemAction i_action, string i_effect)
+void Item::setEffectAndFunction(ItemAction i_action, string i_effect, function<void()> i_function)
 { 
-	actions.emplace_back(i_action.text, i_effect);
+	actions.emplace_back(i_action.text, i_effect, i_function);
 }
 
-void Item::addAction(string i_name, string i_effect)
+void Item::addAction(string i_name, string i_effect, function<void()> i_function)
 {
-	actions.emplace_back(i_name, i_effect);
+	actions.emplace_back(i_name, i_effect, i_function);
 }
 
 void Item::removeAction(int i_aIndex)

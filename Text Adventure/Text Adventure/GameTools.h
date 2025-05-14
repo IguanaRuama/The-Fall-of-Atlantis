@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Location.h"
 
 using namespace std;
 
@@ -10,6 +11,8 @@ namespace Tools
 	{
 	public:
 		static void clearScreen();
+		static void title();
+		static void titleAndLocation(Location* i_location);
 		static void delay(int i_secs);
 		static void exitGame();
 		static void startMusic(int i_music);

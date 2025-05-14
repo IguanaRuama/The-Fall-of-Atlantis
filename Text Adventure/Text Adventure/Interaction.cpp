@@ -10,7 +10,11 @@ Interaction::Interaction(string i_name, string i_description)
 	description = i_description;
 	requiredItem;
 	choices;
+}
 
+string Interaction::getName()
+{
+	return name;
 }
 
 string Interaction::getDescription()
@@ -18,7 +22,7 @@ string Interaction::getDescription()
 	return description;
 }
 
-string Interaction::getChoices()
+string Interaction::outputChoices()
 {
 	string choicesList;
 	cout << "What do you do? \n";
@@ -28,9 +32,12 @@ string Interaction::getChoices()
 	{
 		choicesList += "[" + to_string(i) + "] " + choices[i].text + "\n";
 	}
-	if (getRequiredItems().length() > 0)
+	if (getRequiredItems().size() > 0)
 	{
-		choicesList += "[" + to_string(choices.size() + 1) + "] Use item... \n";
+		for (int i = 0; i < getRequiredItems().size(); i++)
+		{
+			choicesList += "[" + to_string(i + choices.size()) + "] " + " Use the " + getRequiredItems()[i]->getName() + "\n";
+		}
 	}
 	if (!choicesList.empty())
 	{
@@ -40,22 +47,16 @@ string Interaction::getChoices()
 	return choicesList;
 }
 
-string Interaction::getRequiredItems()
+vector<Item*>& Interaction::getRequiredItems()
 {
-	string itemsList;
+	vector<Item*> itemsList;
 
 	for (int i = 0; i < requiredItem.size(); i++)
 	{
 		if (Inventory().hasItem(requiredItem[i]))
 		{
-			itemsList += requiredItem.at((i - 1))->getName() + ", ";
+			itemsList.push_back(requiredItem[i]);
 		}
-
-	}
-
-	if (!itemsList.empty())
-	{
-		itemsList = itemsList.substr(0, itemsList.size() - 2); //removes comma and space
 	}
 
 	return itemsList;
@@ -67,6 +68,11 @@ string Interaction::getEffect(int i_cIndex)
 		return choices[i_cIndex].effectText;
 	}
 	return "Invalid choice.";
+}
+
+function<void()> Interaction::getFunction(int i_cIndex)
+{
+	return choices[i_cIndex].effectFunction;
 }
 
 void Interaction::setDescription(string i_description)
@@ -84,9 +90,14 @@ void Interaction::setEffect(Choice i_choice, string i_effect)
 	choices.emplace_back(i_choice.text, i_effect);
 }
 
-void Interaction::addChoice(string i_text, string i_effect)
+void Interaction::runFunction(function<void()> i_function)
 {
-	choices.emplace_back(i_text, i_effect);
+	i_function();
+}
+
+void Interaction::addChoice(string i_text, string i_effect, function<void()>i_function)
+{
+	choices.emplace_back(i_text, i_effect, i_function);
 }
 
 void Interaction::removeChoice(int i_cIndex)

@@ -14,6 +14,28 @@ Inventory::Inventory()
 
 
 
+void Inventory::takeItemChoice(Item* i_item)
+{
+	cout << "Do you wish to pick up the " << i_item->getName() << "?	(y/n)\n";
+	string input;
+
+	cin >> input;
+
+	if (input == "y" || input == "Y")
+	{
+		addItem(i_item);
+	}
+	else if (input == "n" || input == "N")
+	{
+		cout << "You leave the " << i_item->getName() << " where you found it.\n";
+	}
+	else
+	{
+		cout << "Invalid input, try again.\n";
+		takeItemChoice(i_item);
+	}
+}
+
 void Inventory::addItem(Item* i_item)
 {
 	if (totalSlots == usedSlots) 
@@ -119,7 +141,7 @@ string Inventory::outputInventory()
 
 	for (int i = 0; i < items.size(); i++)
 	{
-		output += items[i]->getName() + "            ";
+		output += outputDescription(i) + "\n";
 	}
 
 	output += "============================================================================================================================= \n";

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <functional>
 
 using namespace std;
 
@@ -8,9 +9,10 @@ struct ItemAction
 {
 	string text;
 	string effectText;
+	function<void()> effectFunction;
 
-	ItemAction(const string& t, const string& e)
-		: text(t), effectText(e) {}
+	ItemAction(const string& t, const string& e, function<void()> eF = []() {})
+		: text(t), effectText(e), effectFunction(eF) {}
 };
 
 class Item
@@ -35,9 +37,9 @@ public:
 	void setDescription(string i_description);
 	void setDefaultActions();
 	void setCost(int i_cost);
-	void setEffect(ItemAction i_action, string i_effect); //here
+	void setEffectAndFunction(ItemAction i_action, string i_effect, function<void()> i_function);
 	
-	void addAction(string i_name, string i_effect);
+	void addAction(string i_name, string i_effect, function<void()> i_function);
 	void removeAction(int i_aIndex);
 
 
