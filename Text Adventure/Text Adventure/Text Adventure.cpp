@@ -41,7 +41,11 @@ void onTimerEnd(int stage)
 	switch (stage)
 	{
 	case 1:
-		cout << "stage 1 transition\n";
+		cout << "The day shifts in the smallest of ways. A faint tremor passes beneath your feet—so gentle it could be mistaken for a passing cart-—\n"
+			" but something in it makes you pause. The fig tree rustles though there is no wind. Far off, beyond the rooftops, a dark smudge lingers\n"
+			" on the horizon. Ships, perhaps... but too many. Too still. No one else seems to notice. Phylas hums to himself as he balances a stick along\n"
+			" the courtyard wall, and Anthusa wipes her hands on her apron, focused on her herbs. But your stomach knots. A feeling—- subtle, sharp, and\n"
+			" certain—- takes hold. Without sounding the alarm, you urge your family to gather what you need and head to the town center. Just in case.\n";
 		break;
 		
 	case 2:
@@ -96,7 +100,7 @@ void nextStage(int& stage)
 	// Ensure we don't transition past the last stage
 	if (stage < 3)
 	{
-		cout << "You rush to the next stage of the envasion" << stage << "!\n";
+		cout << "You rush to the next stage of the invasion" << stage << "!\n";
 		onTimerEnd(stage); // Transition to next stage
 		stage++;
 	}
@@ -391,7 +395,7 @@ void stageOne()
 		courtyard.addLink(&childrenRoom);
 		courtyard.addLink(&bedroom);
 
-		//PATIO INTERACTIONS NOT POINTERS, CHECK NOTES TOMORROW
+		//PATIO INTERACTIONS
 
 		Item patioKey = Item("Patio Key", "A familiar sight that unlocks your front door", 0);
 		patioKey.setDefaultActions();
@@ -711,6 +715,40 @@ void stageOne()
 
 void stageTwo()
 {
+	//LOCATIONS
+	Location townCentre = Location("The Town Centre", "The town centre sprawls with the vibrant chaos of daily life, a mosaic of color, sound, and scent pressed\n"
+		" between whitewashed walls and sun-drenched streets. Stalls crowd the square, their awnings fluttering like sails—heaped with figs, honeycakes, woven linens,\n"
+		" and copper trinkets that catch the light. Merchants shout over one another in good-natured rivalry, their voices rising like gulls over a sea of barter and\n"
+		" banter. The scent of grilled fish mingles with sweet wine and crushed mint from nearby vendors. Street performers dot the open spaces—flute players weaving\n"
+		" bright melodies, a masked actor declaiming some comic verse, a boy balancing on amphorae while a crowd cheers. Children dart between legs, chasing each other\n"
+		" with scraps of bread or toy spears. It is a place of rhythm and routine, where worry has no place—- at least, not yet.", "Make your way back to town centre");
+	Location alleyway = Location("", "", "");
+	Location northMarket = Location("", "", "");
+	Location eastMarket = Location("", "", "");
+	Location southMarket = Location("", "", "");
+	Location westMarket = Location ("", "", "");
+
+	//ADD LINKS
+
+	townCentre.addLink(&northMarket);
+	townCentre.addLink(&alleyway);
+	townCentre.addLink(&eastMarket);
+	townCentre.addLink(&southMarket);
+	townCentre.addLink(&westMarket);
+	northMarket.addLink(&townCentre);
+	northMarket.addLink(&eastMarket);
+	northMarket.addLink(&westMarket);
+	eastMarket.addLink(&townCentre);
+	eastMarket.addLink(&northMarket);
+	eastMarket.addLink(&southMarket);
+	southMarket.addLink(&townCentre);
+	southMarket.addLink(&eastMarket);
+	southMarket.addLink(&westMarket);
+	westMarket.addLink(&townCentre);
+	westMarket.addLink(&northMarket);
+	westMarket.addLink(&southMarket);
+
+	//ADD TOWNCENTRE INTERACTIONS
 
 }
 
