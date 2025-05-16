@@ -16,7 +16,7 @@ public:
 	Shop();
 
 	void displayItems();
-	void buyItem(int index, Inventory& i_inventory, Currency& i_money);
+	void buyItem(Item* i_item, Inventory& i_inventory, Currency& i_money);
 	void addItem(Item* i_item);
 	void sellItem(int index, Inventory& i_inventory, Currency& i_money);
 };

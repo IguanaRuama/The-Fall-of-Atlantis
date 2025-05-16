@@ -1,12 +1,16 @@
 #include "GameTools.h"
 #include "Location.h"
+#include "Location.h"
 #pragma comment(lib, "winmm.lib")
 #include <iostream>
 #include <vector>
 #include <chrono>
 #include <windows.h>
 #include <string>
-#include "Location.h"
+#include <chrono>
+#include <thread>
+#include <stdlib.h>
+
 
 void Tools::GameTools::clearScreen()
 {
@@ -42,7 +46,8 @@ void Tools::GameTools::titleAndLocation(Location* i_location)
 
 void Tools::GameTools::delay(int i_secs)
 {
-	_Thrd_sleep_for(i_secs * 1000);
+	std::this_thread::sleep_for((std::chrono::seconds(i_secs)));
+	
 }
 
 void Tools::GameTools::exitGame()

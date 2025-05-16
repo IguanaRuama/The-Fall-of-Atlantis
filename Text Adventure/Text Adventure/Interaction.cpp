@@ -83,9 +83,17 @@ void Interaction::setRequiredItem(Item* i_requiredItem)
 	requiredItem.push_back(i_requiredItem);
 }
 
-void Interaction::setEffect(Choice i_choice, string i_effect)
+void Interaction::setEffect(const string& text, const string& i_effect)
 {
-	choices.emplace_back(i_choice.text, i_effect);
+	auto it = std::find_if(choices.begin(), choices.end(), [&](const Choice& c)
+		{
+			return c.text == text;
+		});
+
+	if (it != choices.end())
+	{
+		choices.emplace_back(text, i_effect);
+	}
 }
 
 void Interaction::runFunction(function<void()> i_function)
@@ -98,11 +106,17 @@ void Interaction::addChoice(string i_text, string i_effect, function<void()>i_fu
 	choices.emplace_back(i_text, i_effect, i_function);
 }
 
-void Interaction::removeChoice(int i_cIndex)
+
+void Interaction::removeChoice(const string& text)
 {
-	if (i_cIndex >= 0 && i_cIndex < choices.size())
+	auto it = std::find_if(choices.begin(), choices.end(), [&](const Choice& c) 
+		{
+			return c.text == text;
+		});
+
+	if (it != choices.end())
 	{
-		choices.erase(choices.begin() + i_cIndex);
+		choices.erase(it);
 	}
 }
 

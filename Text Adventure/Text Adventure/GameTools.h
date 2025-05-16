@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include < stdlib.h >
 #include "Location.h"
 
 using namespace std;

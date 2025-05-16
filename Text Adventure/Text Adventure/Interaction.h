@@ -13,7 +13,7 @@ struct Choice
 	string effectText;
 	function<void()> effectFunction;
 
-	Choice(string& t, string& e, function<void()> eF = []() {})
+	Choice(const string& t, const string& e, function<void()> eF = []() {})
 		: text(t), effectText(e), effectFunction(eF) {}
 };
 
@@ -38,12 +38,12 @@ public:
 	
 	void setDescription(string i_description);
 	void setRequiredItem(Item* i_requiredItem);
-	void setEffect(Choice i_choice, string i_effect);
+	void setEffect(const string& text, const string& i_effect);
 	void runFunction(function<void()> i_function);
 
 	void outputChoices(Inventory* i_inventory);
 	void addChoice(string i_text, string i_effect, function<void()>i_function);
-	void removeChoice(int i_cIndex);
+	void removeChoice(const string& text);
 
 	bool isAvailable(Inventory i_inventory);
 };

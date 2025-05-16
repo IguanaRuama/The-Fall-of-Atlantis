@@ -9,16 +9,13 @@
 
 Shop::Shop()
 {
-	stock.push_back(new Item("Blunt Dagger", "Clearly used.", 3));
-	stock.back()->setCost(5);
-
-	stock.push_back(new Item("Cloth Cape", "A dark, large, hooded garment.", 8));
-	stock.back()->setCost(5);
+	stock;
 }
 
 void Shop::displayItems()
 {
-	cout << " (Story of markets) items: \n";
+	cout << " Stock: \n"
+		"==================================================================================================================\n";
 	for (int i = 0; i < stock.size(); ++i)
 	{
 		cout << "[" << (i) << "] " << stock[i]->getName()
@@ -27,24 +24,23 @@ void Shop::displayItems()
 	}
 }
 
-void Shop::buyItem(int index, Inventory& i_inventory, Currency& i_money)
+void Shop::buyItem(Item* i_item, Inventory& i_inventory, Currency& i_money)
 {
-	if (index < 0 || index > stock.size())
+	if (!i_item)
 	{
-		cout << " (some yap about needing to try again)" << endl;
+		cout << "You hesitate—there’s nothing to buy." << endl;
 		return;
 	}
 
-	Item* item = stock[index];
-	if (i_money.getMoneyAmount() >= item->getCost())
+	if (i_money.getMoneyAmount() >= i_item->getCost())
 	{
-		i_money.removeMoney(item->getCost());
-		i_inventory.addItem(item);
-		cout << "Yap about what item you got" << item->getName() << endl;
+		i_money.removeMoney(i_item->getCost());
+		i_inventory.addItem(i_item);
+		cout << "You acquired: " << i_item->getName() << endl;
 	}
 	else
 	{
-		cout << "sm about scowling works cause you have no money" << endl;
+		cout << "You scowl at your empty purse—- there’s not enough drachmae." << endl;
 	}
 }
 
