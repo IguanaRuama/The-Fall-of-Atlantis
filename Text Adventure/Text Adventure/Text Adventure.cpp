@@ -189,7 +189,7 @@ void startScreen() //outputs starter text
 
 		"\n Will you outwit the Athenians and protect your family, or will the tides of war claim you all? Your journey begins now.\n"
 
-		"\ Press 'Enter' to continue...";
+		"\ Press 'Enter' to continue...\n";
 
 	getline(cin, input);
 
@@ -523,7 +523,7 @@ void stageOne()
 			" to his room",
 			[&]()
 			{
-				cout << "You can now access the kitchen via the travel menu! " << currentLocation->getLocationName() << endl;
+				cout << "You can now access the kitchen via the travel menu! \n" << currentLocation->getLocationName() << endl;
 				currentLocation->addLink(&kitchen);
 				frontPatio.removeInteraction(&enterHome, frontPatio.getInteractions());
 				//ONE TIME EVENT
@@ -531,13 +531,13 @@ void stageOne()
 		//add key and link
 
 		Interaction explorePatio("Explore the patio", "You stand before your humble home; Phylas remains locked in imaginary battle whilst Anthusa oversees-- her lips curling as he\n"
-			" slays whatever beast dared cross hin.");
+			" slays whatever beast dared cross hin.\n");
 
 		frontPatio.addInteraction(&explorePatio);
 
 		explorePatio.addChoice("Join Phylas.", "With a swift scoop you lift Phylas into the air, swinging and spinning the fearsome hero as his stern facade erupts into childish\n"
 			" giggles. The sight is enough to bring a subtle smile to Anthusa's face accompanied by a quiet tutting. With arms weary from sparring, you place your son back upon\n"
-			" his feet, leaving the 'soldier' back to his battle.",
+			" his feet, leaving the 'soldier' back to his battle.\n",
 			[&]() 
 			{
 				familyBond += 1;
@@ -549,7 +549,7 @@ void stageOne()
 			" catches in her hair, and for a moment, the world narrows to just the two of you. She brushes a bit of soil from her palms onto her tunic and says, 'Back already\n"
 			"? Or did the soldiers grow tired of you showing them how it's done?' There’s warmth in her voice—teasing, but gentle—the kind that wraps around your tired bones like\n"
 			"a well-worn blanket. She slips a small cloth pouch into your hand. 'Here—- three drachmae. I took the olives and greens to the market this morning.The baker paid fair.\n"
-			" She shrugs, modest as ever. 'Might be enough for oil... or whatever it is you warriors waste coin on when you're pretending not to be sore.'",
+			" She shrugs, modest as ever. 'Might be enough for oil... or whatever it is you warriors waste coin on when you're pretending not to be sore.'\n",
 			[&]() {
 				playerCurrency.addMoney(5);
 				explorePatio.removeChoice("Greet Anthusa.");
@@ -560,7 +560,7 @@ void stageOne()
 			" and a layer of dust. Inside, it holds the treasures of a child’s world: a crooked fleet of stick ships with fig-leaf sails, a trio of round stones painted as warriors,\n"
 			" and a clay shard with a scratched-on face, proudly dubbed “Cyclops.” Bits of string, feathers, and bent twigs are tucked into the corners like tools awaiting orders. What\n"
 			" was once a vessel for life-giving water now cradles the wild imaginings of Phylas—battles waged in silence, kingdoms built and toppled before supper, and dreams sturdy\n"
-			"enough to weather any war.",
+			"enough to weather any war.\n",
 			[&]()
 			{});
 
@@ -569,7 +569,7 @@ void stageOne()
 			" Phylas uses it as a pirate ship or watchtower depending on the day.\n"
 			"\n Behind it, wedged into the gap between crate and wall, is a flicker of silver. There lies the family's quiet secret: a flat stone with just enough give to lift free, beneath\n"
 			" which rests the spare key tothe house. It's a hiding spot born of necessity, known only to the three of you—- and now, dusted with the faint mark of your bootprints from earlier\n"
-			" , it feels like the quiet keeper of a dozen small emergencies and daily forgettings.",
+			" , it feels like the quiet keeper of a dozen small emergencies and daily forgettings.\n",
 
 			[&]() 
 			{
@@ -595,14 +595,14 @@ void stageOne()
 			" low at its center, the coals still alive beneath a clay grate. Light from a narrow window drapes the room in a haze of smoke and flour dust, dancing with the scents of cumin,\n"
 			" coriander, and pepperberry. Amphorae line the walls like silent sentinels, their sealed mouths hiding oil, grain, and the salty tang of preserved fish. A stone counter stretches\n"
 			" beneath bunches of drying herbs, its surface smoothed by years of labor—kneading, chopping, grinding. There, a mortar still holds traces of spice, and nearby, a familiar knife\n"
-			" rests idle in the dusting of flour. You can  hear Anthusa humming from beside the counter. This place, built by hand and habit, has always been hers-— and yours by way of her care.");
+			" rests idle in the dusting of flour. You can  hear Anthusa humming from beside the counter. This place, built by hand and habit, has always been hers-— and yours by way of her care.\n");
 		
 		kitchen.addInteraction(&explorekitchen);
 
 
 		explorekitchen.addChoice("Investigate amphorae.", "Lined neatly against the kitchen wall, the clay amphorae stand tall and cool to the touch, their wide mouths sealed with waxed cloth.\n"
 			" As you lift the cover from one marked with a faded fish symbol, a salty scent rises to meet you. Nestled in layers of dried herbs and coarse brine, a few small, cured fish\n"
-			" glisten faintly in the dim light—ready to be taken, traded, or cooked.",
+			" glisten faintly in the dim light—ready to be taken, traded, or cooked.\n",
 			[&]() 
 			{
 				if (!playerInventory.hasItem(&fish))
@@ -615,7 +615,7 @@ void stageOne()
 
 		explorekitchen.addChoice("Investigate motar and pestle.", "Set in the corner of the worn stone counter, the mortar is heavy and well-used, its bowl dusted with traces of ground spice.\n"
 			" Resting beside it, a small bundle of fresh herbs- —rosemary, thyme, and bay leaf—has been tied with twine, ready for use. The scent is sharp and earthy, rising as you reach out\n"
-			" to take it, a piece of the kitchen’s soul wrapped in green.",
+			" to take it, a piece of the kitchen’s soul wrapped in green.\n",
 			[&]() 
 			{
 				if (!playerInventory.hasItem(&spices))
@@ -631,7 +631,7 @@ void stageOne()
 			" but sharp, a tool of the home that could just as easily become something else.\n"
 			"\n As your fingers curl around the knife’s worn handle, Anthusa looks up from her basket with a puzzled frown. 'Rhesus?' she says softly, brushing a lock of hair from her brow.\n"
 			" 'What do you need that for?' There’s no anger in her voice—only curiosity, and a hint of concern.\n"
-			"\n She watches you now, herbs forgotten in her hands.'You’re not headed back to the barracks, are you?' Her tone shifts, just slightly. Not accusing, but wary.");
+			"\n She watches you now, herbs forgotten in her hands.'You’re not headed back to the barracks, are you?' Her tone shifts, just slightly. Not accusing, but wary.\n");
 
 		kitchen.addInteraction(&takeKnifeEncounter);
 
@@ -639,7 +639,7 @@ void stageOne()
 			" eyes. 'For protection.'\n"
 			"\n She doesn’t answer at first. Her gaze lingers on you, steady and unreadable, a bundle of thyme still held loosely in her fingers.The silence stretches.You expect a rebuke, maybe a\n"
 			" sigh—- but instead, she simply turns back to her work, quieter than before.\n"
-			"\n The excuse hangs in the air between you, thin and unconvincing. Whatever danger you’re guarding against, she’s not sure she believes it-— or worse, that you do.",
+			"\n The excuse hangs in the air between you, thin and unconvincing. Whatever danger you’re guarding against, she’s not sure she believes it-— or worse, that you do.\n",
 			[&]() 
 			{
 				playerInventory.takeItemChoice(&knife);
@@ -651,7 +651,7 @@ void stageOne()
 
 		takeKnifeEncounter.addChoice("Set the knife back down; theres no need to worry your wife.", "Your hand hesitates over the knife, then slowly pulls back. The kitchen hums with quiet—- the soft\n"
 			" crackle of the hearth, the rustle of herbs in Anthusa’s hands. She doesn’t look up, and you say nothing. The blade remains where it is, untouched, just another tool in its place. The\n"
-			" moment passes like breath, unnoticed, and the day carries on.",
+			" moment passes like breath, unnoticed, and the day carries on.\n",
 			[&]() 
 			{
 				kitchen.removeInteraction(&takeKnifeEncounter, kitchen.getInteractions());
@@ -665,14 +665,14 @@ void stageOne()
 
 		Interaction exploreChildsRoom = Interaction("Admire Phylas' toys.", "Phylas’ toy collection is a patchwork of imagination and found treasure—wooden soldiers with chipped paint, smooth river stones\n"
 			" pretending to be treasure, and a bundle of twine tangled into what he insists is a sea serpent. Each piece is worn with play and affection, scattered across his room in small, heroic\n"
-			" scenes. To anyone else, it’s a mess; to Phylas, it’s an empire in motion.");
+			" scenes. To anyone else, it’s a mess; to Phylas, it’s an empire in motion.\n");
 
 		childrenRoom.addInteraction(&exploreChildsRoom);
 
 		exploreChildsRoom.addChoice("Rummage in the wooden chest", "You kneel beside the squat wooden chest and lift the lid, greeted by the soft clatter of childhood treasures. Digging past\n"
 			" smooth pebbles, bits of string, and a shell with a hole in it, your fingers close around a familiar shape—roughly carved, worn at the edges. It’s a small wooden soldier, notched at the\n"
 			" shoulder, with a charcoal mark across its chest like your old training tunic. Phylas must have made it to resemble you. Its stance is crooked but proud, a tiny guardian standing amid the\n"
-			" clutter of a child’s world.",
+			" clutter of a child’s world.\n",
 			[&]()
 			{
 				if (!playerInventory.hasItem(&toy))
@@ -686,7 +686,7 @@ void stageOne()
 		Interaction takeSlingshotEncounter = Interaction("Admire his drawings.", "You pause by the wall, eyes tracing the faded mural of dolphins and chariots, now joined by Phylas’ own additions—wobbly\n"
 			" stick-figures locked in battle, a towering cyclops looming over a tiny spear-wielding hero. There’s charm in the rough lines, a fierce little heart behind every stroke. As you smile, your gaze\n"
 			" drifts upward to a dusty shelf, where a familiar shape catches your eye: the slingshot you carved for him last spring, its yew frame still bound with the same bit of worn leather. You hadn’t\n"
-			" realized he kept it so close. If you want to take it with you, you’ll need to choose your words carefully—- it's still his, after all.");
+			" realized he kept it so close. If you want to take it with you, you’ll need to choose your words carefully—- it's still his, after all.\n");
 
 		childrenRoom.addInteraction(&takeSlingshotEncounter);
 
@@ -694,7 +694,7 @@ void stageOne()
 			" 'You’ve kept the old slingshot,' you say, stepping closer. 'Mind if I borrow her for a bit? Just in case I run into any troublemakers.'\n"
 			"\n Phylas looks up from the floor where he’s been arranging his toy soldiers into a lopsided battle line.He blinks, then gives a small, reluctant nod.\n"
 			"\n 'Alright... but you better bring it back. He’s got a name now—- Thornstriker.'\n"
-			"\n You lift it gently, the leather still taut, the weight of it surprisingly familiar in your grip.",
+			"\n You lift it gently, the leather still taut, the weight of it surprisingly familiar in your grip.\n",
 			[&]()
 			{
 				playerInventory.addItem(&slingshot);
@@ -707,7 +707,7 @@ void stageOne()
 			"\n 'Still keeping your finest weapon up high, eh? You wouldn’t mind if your old man took it for one last heroic battle, would you?'\n"
 			"\n Phylas lights up, practically bouncing as he hops to his feet.\n"
 			"\n 'Only if you promise to shout something cool when you use it!' he says, puffing out his chest. 'Like—- 'for Atlantis!'\n"
-			"\n You laugh and pluck the slingshot from its perch. 'for Atlantis' it is.'",
+			"\n You laugh and pluck the slingshot from its perch. 'for Atlantis' it is.'\n",
 			[&]()
 			{
 				playerInventory.addItem(&slingshot);
@@ -721,7 +721,7 @@ void stageOne()
 			"\n 'Don’t,' Phylas says flatly. He’s not pouting, not whining—just watching you, quiet and firm. 'That one stays with me.'\n"
 			"\nFor a moment, you consider arguing. But something in his tone—- the way he sits a little straighter, the way his fingers curl protectively around a nearby toy-- makes you step back. The\n"
 			" slingshot stays on the shelf.\n"
-			"\n He doesn’t say anything else. Doesn’t need to.The silence that follows is colder than before.",
+			"\n He doesn’t say anything else. Doesn’t need to.The silence that follows is colder than before.\n",
 			[&]()
 			{
 				familyBond-=1;
@@ -751,13 +751,13 @@ void stageOne()
 
 		Interaction exploreBedroom = Interaction("Wander through your bedroom.", "A woolen cloak, frayed at the hem from years of use, hangs over a peg near the doorway, still carrying the faint scent of ash and laurel.\n"
 			" On a low wooden shelf sits a small collection of clay vials—- Anthusa’s precious oils—pressed from lavender, myrtle, and crushed olives, their stoppers stained with use. Beside them lies a delicate\n"
-			" bone comb, its teeth worn smooth from years of tending curls and quiet mornings. The room holds little in the way of luxury, but every item speaks of care, routine, and a life gently shared.");
+			" bone comb, its teeth worn smooth from years of tending curls and quiet mornings. The room holds little in the way of luxury, but every item speaks of care, routine, and a life gently shared.\n");
 
 		bedroom.addInteraction(&exploreBedroom);
 
 		exploreBedroom.addChoice("Investigate the cloak", "You step toward the cloak, its coarse wool brushing softly against the wall where it hangs. The fabric is thick, weathered, and heavy with the scent of smoke and\n"
 			" sun-— your scent. Faint stains from old marches and scattered threads at the hem speak of long days on the road and nights beneath uncertain skies. As your fingers trace the worn edges, a small copper\n"
-			" brooch glints at the collar—Anthusa’s handiwork, fastened there long ago. It's more than just a soldier’s cloak. It’s a quiet ledger of where you’ve been… and who waited for you to come home.",
+			" brooch glints at the collar—Anthusa’s handiwork, fastened there long ago. It's more than just a soldier’s cloak. It’s a quiet ledger of where you’ve been… and who waited for you to come home.\n",
 			[&]()
 			{
 				playerInventory.takeItemChoice(&mensCloak);
@@ -772,7 +772,7 @@ void stageOne()
 		exploreBedroom.addChoice("Inspect Anthusa's oils.", "Lined neatly along a low shelf, Anthusa’s oils sit in small clay vials, their rounded forms smoothed by years of gentle use. You lift one—lavender, by the\n"
 			" faint, sweet scent that clings to the rim—and the cool clay warms quickly in your hand. Each stopper is stained with traces of its contents: gold from pressed olives, pale green from crushed bay, a\n"
 			" dark swirl where rosemary once steeped. They aren’t luxuries, not here—they’re tools of care, of comfort. These quiet jars hold the rhythms of the home: healing, soothing, softening what the world\n"
-			" wears down.",
+			" wears down.\n",
 			[&]()
 			{
 				playerInventory.takeItemChoice(&oils);
@@ -782,7 +782,7 @@ void stageOne()
 		exploreBedroom.addChoice("Admire Anthusa's comb.", "Resting beside the oils, the bone comb lies quiet and familiar, its ivory surface smoothed to a gentle sheen by years of use. The teeth are fine, some slightly\n"
 			" crooked from time or tugged tangles, but none broken—a testament to its care. You pick it up, light as breath, and feel the faint warmth still clinging to it. Traces of oil linger between the prongs,\n"
 			" scented with myrtle and rosemary. This was never just for grooming—- it was part of Anthusa’s morning ritual, each stroke a moment of calm, a reclaiming of order before the day began. It’s a humble thing,\n"
-			" yet it hums with the presence of its owner.",
+			" yet it hums with the presence of its owner.\n",
 			[&]()
 			{
 				playerInventory.takeItemChoice(&comb);
@@ -799,13 +799,13 @@ void stageOne()
 
 		Interaction exploreGarden = Interaction("Admire the courtyard.", "Near the fig tree—- bent with age, yet generous with fruit—- sits a burlap sack, half-tucked beneath the garden bench. Inside, a handful of vegetables\n"
 			" remain from Anthusa’s morning at the market: onions, a few soft tomatoes, and sprigs of greens still damp from dew and handling. She must have dropped it here in her rush to tend the garden, or to chase\n"
-			" Phylas from climbing the lemon bush again. It rests quietly now, a simple thing—- humble proof of care, of labor, of the home’s quiet pulse.");
+			" Phylas from climbing the lemon bush again. It rests quietly now, a simple thing—- humble proof of care, of labor, of the home’s quiet pulse.\n");
 
 		courtyard.addInteraction(&exploreGarden);
 
 		exploreGarden.addChoice("Inspect the sack.", "You crouch beside the bench and pull the sack into better light. The rough fabric is damp in places, darkened with soil and the scent of crushed herbs. Inside, a modest harvest\n"
 			" nestles together—wilted greens, a few onions with dirt still clinging to their roots, and two bruised tomatoes softening at the edges. It’s what remains after a morning at the market, set aside and nearly forgotten.\n"
-			" The weight of it is light, but it carries the shape of a day’s work—- Anthusa’s careful hands, trading quietly for coin, never wasting what could still feed a home.",
+			" The weight of it is light, but it carries the shape of a day’s work—- Anthusa’s careful hands, trading quietly for coin, never wasting what could still feed a home.\n",
 			[&]()
 			{
 				if (!playerInventory.hasItem(&vegetables))
@@ -894,7 +894,7 @@ void stageTwo()
 	//ADD TOWNCENTRE INTERACTIONS
 
 	Interaction scoutArea = Interaction("You survey the town centre carefully, eyes drifting toward the docks", "The docks curve around the town’s edge, split into three distinct harbors—one for fishing boats, another for merchant cargo,\n"
-		" and a broad western bay that opens toward the sea. As sunset settles over the city, the piers remain active with the final labors of the day, though an uneasy stillness lingers beyond the horizon.");
+		" and a broad western bay that opens toward the sea. As sunset settles over the city, the piers remain active with the final labors of the day, though an uneasy stillness lingers beyond the horizon.\n");
 
 	townCentre.addInteraction(&scoutArea);
 
@@ -930,14 +930,14 @@ void stageTwo()
 
 	eavesdrop.addChoice("Continue to listen...", "You edge closer, feigning interest in a nearby stall as their whispers grow sharper. One murmurs, 'He’s posted down by the bay, standing\n"
 		" guard near one of the ships. You can’t miss him—- wears a cracked bronze gauntlet on his left hand. Says little, watches even less, but if you’ve got coin, he might\n"
-		" just look the other way.' The others nod, eyes flicking around nervously before the conversation trails off, leaving the image of the gauntleted soldier etched in your mind.", [&]()
+		" just look the other way.' The others nod, eyes flicking around nervously before the conversation trails off, leaving the image of the gauntleted soldier etched in your mind.\n", [&]()
 		{
 			townCentre.removeInteraction(&eavesdrop, townCentre.getInteractions());
 			//ONE TIME EVENT
 		});
 
 	eavesdrop.addChoice("Back away-- what if they notice you?","Sensing the weight of their secret and the sharp glances flicking your way, you decide it’s best not to linger. Quietly\n"
-		" stepping back from the shadowed archway, you weave through the bustling crowd, the hum of the market swallowing your footsteps as you slip away before suspicion can catch you.", [&]()
+		" stepping back from the shadowed archway, you weave through the bustling crowd, the hum of the market swallowing your footsteps as you slip away before suspicion can catch you.\n", [&]()
 		{
 			townCentre.removeInteraction(&eavesdrop, townCentre.getInteractions());
 			//ONE TIME EVENT
@@ -946,14 +946,14 @@ void stageTwo()
 	//ALLEYWAY
 
 	mensCloak = Item("A stolen mens cloak","Its faded fabric once served to shield its wearer from the harsh night and prying eyes, now just a ragged reminder of tougher times. Despite its wear,\n"
-		" it still carries the faint scent of smoke and shadowed alleys", 3);
+		" it still carries the faint scent of smoke and shadowed alleys\n", 3);
 
 	womensCloak.setDefaultActions();
 	childsCloak.setDefaultActions();
 
 	Interaction speakWithBeggars = Interaction("Speak with the beggars.", "You step cautiously closer. One of the beggars, an older man with a crooked nose and hands wrapped in cloth, lifts his\n"
 		"chin. 'Spare something for those left behind?' he rasps. His companions watch you, saying nothing, but their eyes speak the same question. There's no menace—only hunger,\n"
-		" and a wary hope. You could offer them coin… or keep your purse close.");
+		" and a wary hope. You could offer them coin… or keep your purse close.\n");
 
 	alleyway.addInteraction(&speakWithBeggars);
 	
@@ -962,7 +962,7 @@ void stageTwo()
 		speakWithBeggars.addChoice("Offer them 5 drachmae from your pouch.", "You draw a few worn coins from your pouch and extend them toward the nearest beggar—a wiry man with hollow cheeks and eyes\n"
 			" like ash. His hand trembles slightly as he takes them, and for a moment, the group falls silent. Then, softly, murmured thanks ripple through the alley like wind through dry leaves.\n"
 			" You leave with your purse lighter—- but not empty—- and the faint sense that even in shadowed places, good will is not without reward. When you glance back, you catch Anthusa watching\n"
-			" you quietly. She says nothing, but the warmth in her eyes speaks volumes.", [&]()
+			" you quietly. She says nothing, but the warmth in her eyes speaks volumes.\n", [&]()
 			{
 				playerCurrency.removeMoney(5);
 				familyBond += 2;
@@ -1024,7 +1024,7 @@ void stageTwo()
 
 	//NORTHMARKET
 	Interaction knucklebones = Interaction("Join the game of knucklebones", "A grinning man with a missing tooth beckons you over, but not before reminding you that a 5 drachmae bet is required to join the game. As you place\n"
-		" your coins on the table, the thrill of chance hums beneath the noise of the market, promising small fortune or quick loss in equal measure.");
+		" your coins on the table, the thrill of chance hums beneath the noise of the market, promising small fortune or quick loss in equal measure.\n");
 
 	northMarket.addInteraction(&knucklebones);
 
@@ -1069,7 +1069,7 @@ void stageTwo()
 
 	stealFromWoman.addChoice("Take the coins and run, bold and unapologetic.", "You snatch a fistful of coins from the woman’s purse and bolt, the clatter of her shouted protest trailing behind you. The crowded market parts just enough for your escape—- until\n"
 		" a broad-shouldered merchant steps into your path. You crash into him, stagger, and fumble the stolen drachmae into your tunic. But in your haste, you don’t notice the telltale clink at your feet—two of your own coins spill\n"
-		" onto the ground. They gleam in the dirt, not unlike the shame catching in your wife's eyes from across the square.", [&]()
+		" onto the ground. They gleam in the dirt, not unlike the shame catching in your wife's eyes from across the square.\n", [&]()
 		{
 			playerCurrency.removeMoney(2);
 
@@ -1081,7 +1081,7 @@ void stageTwo()
 	//East Market
 	Interaction enterClothesShop = Interaction("Step into the stall and browse the rows of dyed tunics and worn sandals.", "You step into the clothier’s stall, where worn cloaks sway gently from a rope line. The air smells of wool and pressed olive oil. Amid faded tunics and tired\n"
 		" sandals, a small collection of cloaks catches your eye—- a thick mantle fit for a man, a light green wrap for a woman, and a small ochre cloak just right for a child. None are new, but each could disguise\n"
-		" your family, if you’re willing to part with the coin.");
+		" your family, if you’re willing to part with the coin.\n");
 
 	Shop clothesShop;
 
@@ -1089,43 +1089,43 @@ void stageTwo()
 
 	if (!playerInventory.hasItem(&mensCloak))
 	{
-		mensCloak = Item("Thick Mens Cloak", "A deep brown, coarse wool cloak with bone clasps and the faint scent of smoke. Heavy and well-- worn, it's built for hard days and colder nights—practical and lasting.", 10);
+		mensCloak = Item("Thick Mens Cloak", "A deep brown, coarse wool cloak with bone clasps and the faint scent of smoke. Heavy and well-- worn, it's built for hard days and colder nights—practical and lasting.\n", 10);
 		clothesShop.addItem(&mensCloak);
 
-		enterClothesShop.addChoice("Purchase mens cloak", "You pass a few worn drachmae across the stall’s table. The vendor nods, folds the cloak neatly, and presses it into your hands—- a quiet trade sealed in calloused fingers and shared necessity.", [&]()
+		enterClothesShop.addChoice("Purchase mens cloak", "You pass a few worn drachmae across the stall’s table. The vendor nods, folds the cloak neatly, and presses it into your hands—- a quiet trade sealed in calloused fingers and shared necessity.\n", [&]()
 			{
 				clothesShop.buyItem(&mensCloak, playerInventory, playerCurrency);
 			});
 	}
 	if (!playerInventory.hasItem(&womensCloak))
 	{
-		womensCloak = Item("Womans Green Wrap", "A faded green linen wrap, soft with age and patterned with near-invisible laurel leaves. Light and graceful, it's modest but enduring-— just like Anthusa.", 10);
+		womensCloak = Item("Womans Green Wrap", "A faded green linen wrap, soft with age and patterned with near-invisible laurel leaves. Light and graceful, it's modest but enduring-— just like Anthusa.\n", 10);
 		clothesShop.addItem(&womensCloak);
 
-		enterClothesShop.addChoice("Purchase womens cloak", "You pass a few worn drachmae across the stall’s table. The vendor nods, folds the cloak neatly, and presses it into your hands—- a quiet trade sealed in calloused fingers and shared necessity.", [&]()
+		enterClothesShop.addChoice("Purchase womens cloak", "You pass a few worn drachmae across the stall’s table. The vendor nods, folds the cloak neatly, and presses it into your hands—- a quiet trade sealed in calloused fingers and shared necessity.\n", [&]()
 			{
 				clothesShop.buyItem(&womensCloak, playerInventory, playerCurrency);
 			});
 	}
 	if (!playerInventory.hasItem(&childsCloak))
 	{
-		childsCloak = Item("Child’s Ochre Cloak", "A sun-bleached, ochre cloak with a fish-shaped wooden toggle. Patched and faded, it still carries warmth and a touch of play, sized for a child chasing through the streets..", 5);
+		childsCloak = Item("Child’s Ochre Cloak", "A sun-bleached, ochre cloak with a fish-shaped wooden toggle. Patched and faded, it still carries warmth and a touch of play, sized for a child chasing through the streets...\n", 5);
 		clothesShop.addItem(&childsCloak);
 
-		enterClothesShop.addChoice("Purchase childs cloak", "You pass a few worn drachmae across the stall’s table. The vendor nods, folds the cloak neatly, and presses it into your hands—- a quiet trade sealed in calloused fingers and shared necessity.", [&]()
+		enterClothesShop.addChoice("Purchase childs cloak", "You pass a few worn drachmae across the stall’s table. The vendor nods, folds the cloak neatly, and presses it into your hands—- a quiet trade sealed in calloused fingers and shared necessity.\n", [&]()
 			{
 				clothesShop.buyItem(&childsCloak, playerInventory, playerCurrency);
 			});
 	}
 
 	Interaction music = Interaction("You close your eyes for a moment, letting the lively music wash over you", "Despite the impending threat of enemy ships looming on the horizon, for a brief time the music carries you away, weaving a fragile moment of peace and escape amidst\n"
-		" the gathering storm. The dancers whirl and the musicians play on, as if daring fate to break this fleeting celebration of life in Atlantis’s last hours.");
+		" the gathering storm. The dancers whirl and the musicians play on, as if daring fate to break this fleeting celebration of life in Atlantis’s last hours.\n");
 
 	eastMarket.addInteraction(&music);
 
 	music.addChoice("Take Anthusa’s hand and whisper a playful invitation to dance", "You take Anthusa’s hand gently, feeling the warmth of her skin against yours. The music swells, and together you move in time with the lively rhythm, weaving through\n"
 		" the crowd like a single, flowing shadow. Her eyes meet yours—- bright with a mix of joy and quiet resolve—as the world around you blurs into the vibrant colors and sounds of the eastern market. For this\n"
-		" moment, fear and war fall away, replaced by the simple, timeless connection of dance.", [&]()
+		" moment, fear and war fall away, replaced by the simple, timeless connection of dance.\n", [&]()
 		{
 			familyBond += 2;
 
@@ -1133,11 +1133,11 @@ void stageTwo()
 		});
 
 	music.addChoice("You grin warmly and tease Phylas, 'Come on, boy—- show what your ancestors taught you!'", "You take Phylas’ hand, his small fingers fitting snugly in yours. Together, you move to the rhythm of the music swirling through the market-— his laughter bright and infectious\n"
-		" as you both spin and sway, the worries of the impending ships momentarily forgotten in this rare moment of joy.", [&]()
+		" as you both spin and sway, the worries of the impending ships momentarily forgotten in this rare moment of joy.\n", [&]()
 		{
 			familyBond += 2;
 
-			music.removeChoice("You grin warmly and tease Phylas, 'Come on, boy—- show what your ancestors taught you!'");
+			music.removeChoice("You grin warmly and tease Phylas, 'Come on, boy—- show what your ancestors taught you!\n'");
 		});
 
 	//SOUTHERN MARKET
@@ -1159,7 +1159,7 @@ void stageTwo()
 
 		if (!playerInventory.hasItem(&broach))
 		{
-			enterClothesShop.addChoice("Purchase dagger", "You pass a few worn drachmae across the stall’s table. The blacksmith nods, and presses it into your hands—- a quiet trade sealed in calloused fingers and shared necessity.", [&]()
+			enterClothesShop.addChoice("Purchase dagger", "You pass a few worn drachmae across the stall’s table. The blacksmith nods, and presses it into your hands—- a quiet trade sealed in calloused fingers and shared necessity.\n", [&]()
 				{
 					clothesShop.buyItem(&knife, playerInventory, playerCurrency);
 				});
@@ -1186,7 +1186,7 @@ void stageTwo()
 	Interaction enterFoodShop = Interaction("Follow the aroma of spiced meats and sweet pastries to a bustling food stall.", "The stall is a riot of color and scent, its wooden counter laden with the bounty of the southern isles. Clay dishes overflow with marinated olives, their skins glistening with oil\n"
 		" and herbs. Fresh bread—- round, golden loaves still warm from the oven—is stacked beside small bowls of whipped feta and garlic spread. Skewers of lamb, charred and spiced, sizzle gently over a clay\n"
 		" brazier, while clusters of figs and pomegranates rest in woven baskets, their sweetness promised in every glint of juice. Amphorae of dark red wine lean against the stall’s frame, wax-sealed and\n"
-		" fragrant. Behind it all, the vendor—- a thick-waisted woman with flour on her sleeves—- greets customers with a booming voice and a practiced smile.");
+		" fragrant. Behind it all, the vendor—- a thick-waisted woman with flour on her sleeves—- greets customers with a booming voice and a practiced smile.\n");
 
 	Shop foodShop;
 
@@ -1201,7 +1201,7 @@ void stageTwo()
 				playerCurrency.removeMoney(5);
 				familyBond += 1;
 
-				enterFoodShop.removeChoice("Buy a honeyed pastry for Anthusa— - something sweet to lighten the day");
+				enterFoodShop.removeChoice("Buy a honeyed pastry for Anthusa— - something sweet to lighten the day\n");
 			});
 	}
 
@@ -1213,7 +1213,7 @@ void stageTwo()
 				playerCurrency.removeMoney(5);
 				familyBond += 1;
 
-				enterFoodShop.removeChoice("Buy a honeyed pastry for Anthusa— - something sweet to lighten the day");
+				enterFoodShop.removeChoice("Buy a honeyed pastry for Anthusa— - something sweet to lighten the day\n");
 			});
 	}
 
