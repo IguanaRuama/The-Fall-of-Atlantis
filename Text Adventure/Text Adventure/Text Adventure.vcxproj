@@ -24,6 +24,7 @@
     <ProjectGuid>{f9f64647-fd08-4251-b348-f6a0e7e80353}</ProjectGuid>
     <RootNamespace>TextAdventure</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>The Fall of Atlantis</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -134,7 +135,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Location.cpp" />
     <ClCompile Include="Shop.cpp" />
-    <ClCompile Include="Text Adventure.cpp" />
+    <ClCompile Include="TheFallofAtlantis.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Currency.h" />
