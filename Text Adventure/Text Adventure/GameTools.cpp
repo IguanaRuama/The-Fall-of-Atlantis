@@ -54,12 +54,13 @@ void Tools::GameTools::exitGame()
 {		
 	cout << "Are you sure you sure you want to leave this adventure?	y/n \n";
 	string input;
+	cin >> input;
 		
 	if (input == "y")
 	{
 		cout << "We hope to see you soon solider... \n";
 		delay(3);
-		exit;
+		exit(0);
 	}
 	if (input == "n")
 	{
@@ -69,7 +70,7 @@ void Tools::GameTools::exitGame()
 	else 
 	{
 		cout << "Invalid input, try again. \n";
-		exit;
+		return;
 	}
 }
 

@@ -139,7 +139,7 @@ vector<Item*>& Inventory::getItems()
 	return items;
 }
 
-void Inventory::outputInventory()
+void Inventory::outputInventory(Inventory* i_playerInventory)
 {
 	cout << "============================================================================================================================= \n";
 	cout << "Inventory: \n";
@@ -150,6 +150,10 @@ void Inventory::outputInventory()
 	}
 
 	cout << "============================================================================================================================= \n";
+
+	cout << "Press Enter to return to the menu...";
+	cin.ignore();
+	cin.get();  // Wait for user to press Enter
 
 }
 
