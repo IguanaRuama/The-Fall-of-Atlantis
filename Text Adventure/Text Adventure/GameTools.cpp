@@ -73,41 +73,5 @@ void Tools::GameTools::exitGame()
 	}
 }
 
-void Tools::GameTools::startMusic(int i_music)
-{
-	switch (i_music)
-	{
-	case 1:
-		PlaySound(L"Intro.wav", NULL, SND_FILENAME | SND_ASYNC); //SFML if had time to implement
-		break;
-	default:
-		break;
-	}
-}
-
-void Tools::GameTools::stopMusic()
-{
-	PlaySound(NULL, 0, 0);
-}
-
-void Tools::GameTools::outputImage(int i_stage)
-{
-	switch (i_stage)
-	{
-	case 1:
-		cout << "afloat atlantis \n";
-		break;
-
-	case 2:
-		cout << "attacked atlantis \n";
-		break;
-	case 3:
-		cout << "sunken atlantis \n";
-		break;
-	default:
-		cout << "image selection error \n";
-		break;
-	}
-}
 
 
